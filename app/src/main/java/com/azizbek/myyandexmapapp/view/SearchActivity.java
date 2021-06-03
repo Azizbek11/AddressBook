@@ -510,6 +510,16 @@ public class SearchActivity extends AppCompatActivity implements SuggestSession.
                             if (location != null) {
                                 wayLatitude = location.getLatitude();
                                 wayLongitude = location.getLongitude();
+                                Point point = new Point(wayLatitude, wayLongitude);
+                                mapview.getMap().move(
+                                        new CameraPosition(point, 15f, 0.0f, 0.0f),
+                                        new Animation(Animation.Type.SMOOTH, 1),
+                                        null);
+                                MapObjectCollection mapObjects = mapview.getMap().getMapObjects();
+                                mapObjects.clear();
+                                mapObjects.addPlacemark(
+                                        point,
+                                        ImageProvider.fromResource(this, R.drawable.user_arrow));
                             }
                         });
             } else {
